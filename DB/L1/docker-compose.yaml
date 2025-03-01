@@ -1,0 +1,21 @@
+services:
+  mysql:
+    container_name: db
+    image: mysql:latest
+    restart: on-failure
+    ports:
+      - 3306:3306
+    env_file:
+      - .env
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  dbeaver:
+    container_name: dbadmin
+    image: dbeaver/cloudbeaver
+    restart: on-failure
+    ports:
+      - 8978:8978
+
+volumes:
+  mysql_data:

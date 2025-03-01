@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "l1"
+version = "0.1.0"
+description = ""
+authors = ["nickAnhel <anhimovn1@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.2.3"
+matplotlib = "^3.10.0"
+aiomysql = "^0.2.0"
+textual = "^2.1.1"
+textual-dev = "^1.7.0"
+pydantic-settings = "^2.8.0"
+dependency-injector = "^4.45.0"
+cryptography = "^44.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

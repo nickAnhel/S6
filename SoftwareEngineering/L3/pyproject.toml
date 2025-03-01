@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "l3"
+version = "0.1.0"
+description = ""
+authors = ["nickAnhel <anhimovn1@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+textual = "^2.1.2"
+textual-dev = "^1.7.0"
+dependency-injector = "^4.46.0"
+neo4j = "^5.28.1"
+pydantic-settings = "^2.8.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
