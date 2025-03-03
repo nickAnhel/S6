@@ -111,7 +111,7 @@ class Lab3App(App):
             ),
             QueryRowTable(
                 services_service.get_all_ordered_by_usage,
-                title="Get all services orderes by usage",
+                title="Get all services ordered by popularity",
             ),
             QueryRowTableWithInput(
                 clients_service.get_client_bookings,
