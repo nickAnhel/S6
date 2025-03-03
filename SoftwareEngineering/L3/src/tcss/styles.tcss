@@ -1,0 +1,20 @@
+QueryRowTable,
+QueryRowTableWithInput {
+    background: $boost;
+    margin: 1;
+}
+
+.button {
+    width: 10;
+    margin-bottom: 1;
+    margin-left: 1;
+}
+
+.table {
+    max-height: 20;
+    margin-left: 1;
+}
+
+.input-field {
+    margin-bottom: 1;
+}

@@ -4,33 +4,27 @@ import typing_extensions as te
 
 import neo4j
 
+from config import settings
+
 
 class Neo4jConnectionHelper:
-    _connection: neo4j.Driver
+    _session: neo4j.Session
 
-    def __init__(
-        self,
-        db_url: str,
-        user: str,
-        password: str
-    ) -> None:
-        self._db_url = db_url
-        self._user = user
-        self._password = password
+    def __init__(self, db_url: str, user: str, password: str) -> None:
+        self._driver = neo4j.GraphDatabase.driver(
+            uri=db_url,
+            auth=(user, password),
+        )
 
     @contextmanager
-    def connect(self) -> tp.Generator[tp.Self, tp.Any, None]:
+    def session(self, db: str = settings.db_name) -> tp.Generator[tp.Self, tp.Any, None]:
         try:
-            self._connection = neo4j.GraphDatabase.driver(
-                uri=self._db_url,
-                auth=(self._user, self._password),
-            )
+            self._session = self._driver.session(database=db)
             yield self
 
         finally:
-            self._connection.close()
+            self._session.close()
 
     def execute(self, query: te.LiteralString, **params: tp.Any) -> list[dict[str, tp.Any]]:
-        with self._connection.session() as session:
-            result = session.run(query, params)
-            return result.data()
+        result = self._session.run(query, params)
+        return result.data()
