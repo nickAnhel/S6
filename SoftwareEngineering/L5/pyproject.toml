@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "l5"
+version = "0.1.0"
+description = ""
+authors = ["nickAnhel <anhimovn1@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.13"
+apache-airflow = {extras = ["postgres"], version = "^2.10.5"}
+pandas = "^2.2.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

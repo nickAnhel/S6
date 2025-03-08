@@ -1,0 +1,2 @@
+base,visibility,dt,timezone,id,name,cod,coord.lon,coord.lat,main.temp,main.feels_like,main.temp_min,main.temp_max,main.pressure,main.humidity,main.sea_level,main.grnd_level,wind.speed,wind.deg,clouds.all,sys.type,sys.id,sys.country,sys.sunrise,sys.sunset,weather.id,weather.main,weather.description,weather.icon
+stations,3700,1741395061,3600,2747891,Rotterdam,200,4.4792,51.9225,7.890000000000043,6.680000000000007,7.140000000000043,8.270000000000039,1015,74,1015,1015,2.06,120,9,1,1541,NL,1741414337,1741455221,721,Haze,haze,50n
