@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Task 2</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="username-form" class="username-form hidden">
+            <h2>Enter your username</h2>
+            <input type="text" id="username-input" placeholder="Username" required maxlength="16">
+            <button onclick="saveName()">Save</button>
+        </div>
+
+        <div id="greeting" class="greeting hidden">
+            <h2>Hello, <span id="username"></span>! <br>Welcome back!</h2>
+            <button onclick="showEditForm()" class="edit-btn">Change username</button>
+        </div>
+
+        <div class="visit-counter">
+            Visit count: <span id="visit-count">0</span>
+        </div>
+    </div>
+
+    <script>
+        function saveName() {
+            const usernameInput = document.getElementById("username-input");
+            const username = usernameInput.value.trim();
+
+            if (username) {
+                document.cookie = `username=${encodeURIComponent(username)}; max-age=31536000; path=/`;
+                showGreeting(username);
+                usernameInput.value = "";
+            }
+        }
+
+        function showGreeting(name) {
+            document.getElementById("username-form").classList.add("hidden");
+            document.getElementById("greeting").classList.remove("hidden");
+            document.getElementById("username").textContent = name;
+        }
+
+        function showEditForm() {
+            document.getElementById("greeting").classList.add("hidden");
+            document.getElementById("username-form").classList.remove("hidden");
+            document.getElementById("username-input").focus();
+        }
+
+        function checkSavedName() {
+            const usernameCookie = document.cookie.split("; ").find(cookie => cookie.startsWith("username="));
+
+            if (usernameCookie) {
+                const name = decodeURIComponent(usernameCookie.split("=")[1]);
+                showGreeting(name);
+            } else {
+                document.getElementById("username-form").classList.remove("hidden");
+            }
+        }
+
+        function updateVisitCounter() {
+            let visitCount = localStorage.getItem("visitСount");
+            visitCount = visitCount ? parseInt(visitCount) + 1 : 1;
+            localStorage.setItem("visitСount", visitCount);
+            document.getElementById("visit-count").textContent = visitCount;
+        }
+
+        window.onload = function () {
+            checkSavedName();
+            updateVisitCounter();
+        };
+    </script>
+</body>
+
+</html>

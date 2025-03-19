@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>Task 1</title>
+</head>
+
+<body>
+    <div id="background"></div>
+    <div class="container">
+        <a id="image-link" href="images/1.jpg" class="image-wrapper" target="_blank">
+            <img id="image" src="./images/1.jpg" alt="Image 1">
+        </a>
+        <div id="markers" class="markers">
+            <div id="0" class="marker current"></div>
+            <div id="1" class="marker"></div>
+            <div id="2" class="marker"></div>
+        </div>
+    </div>
+
+    <script>
+        let currImageIndex = 0;
+        let isAnimating = false;
+
+        const imageDir = "images";
+        const imageData = [
+            { src: "1.jpg", link: "images/1.jpg" },
+            { src: "2.jpg", link: "images/2.jpg" },
+            { src: "3.jpg", link: "images/3.jpg" }
+        ];
+
+
+        const imageElem = document.getElementById("image");
+        const imageLink = document.getElementById("image-link");
+        const bgElem = document.getElementById("background");
+        const markersElem = document.getElementById("markers");
+
+        function switchImage(newIndex) {
+            if (isAnimating || currImageIndex === newIndex) return;
+
+            isAnimating = true;
+            const currentMarker = document.getElementById(`${currImageIndex}`);
+            const newMarker = document.getElementById(`${newIndex}`);
+
+            imageElem.style.opacity = 0;
+            imageElem.style.transform = "scale(1.05)";
+
+            bgElem.style.transform = "scale(1.3)";
+            bgElem.style.filter = "blur(3rem)";
+
+            markersElem.style.opacity = 0;
+            markersElem.style.transform = "scale(0.9)";
+
+            currentMarker.classList.remove("current");
+
+            setTimeout(() => {
+                imageLink.href = imageData[newIndex].link;
+                imageElem.src = `./${imageDir}/${imageData[newIndex].src}`;
+
+                bgElem.style.backgroundImage = `url(./${imageDir}/${imageData[newIndex].src})`;
+
+                newMarker.classList.add("current");
+
+                imageElem.style.opacity = 1;
+                imageElem.style.transform = "scale(1)";
+
+                bgElem.style.transform = "scale(1)";
+                bgElem.style.filter = "blur(1rem)";
+
+                markersElem.style.opacity = 1;
+                markersElem.style.transform = "scale(1)";
+
+                currImageIndex = newIndex;
+                isAnimating = false;
+            }, 500);
+        }
+
+        function setImageInterval() {
+            return setInterval(
+                () => {
+                    const newIndex = (currImageIndex + 1) % 3;
+                    switchImage(newIndex);
+                },
+                3000
+            );
+        };
+
+        let interval = setImageInterval();
+
+        imageElem.addEventListener("mouseenter", () => {
+            clearInterval(interval);
+        })
+
+        imageElem.addEventListener("mouseleave", () => {
+            interval = setImageInterval();
+        })
+
+    </script>
+</body>
+
+</html>
