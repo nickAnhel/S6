@@ -4,7 +4,7 @@ async function fetchData(url) {
     if (!response.ok)
         throw new Error(`Failed to get data from ${url}`)
 
-    return response.json()
+    return response.text()
 }
 
 
