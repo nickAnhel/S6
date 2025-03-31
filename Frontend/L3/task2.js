@@ -6,6 +6,9 @@ class Student {
     }
 
     set name(value) {
+        if (value.length < 2)
+            throw new Error("Name must be at least 2 characters long")
+
         this._name = value;
     }
 
@@ -14,6 +17,9 @@ class Student {
     }
 
     set age(value) {
+        if (value <= 0)
+            throw new Error("Age must be positive")
+
         this._age = value;
     }
 
@@ -22,6 +28,9 @@ class Student {
     }
 
     set grade(value) {
+        if (value <= 0)
+            throw new Error("Grade must be positive")
+
         this._grade = value;
     }
 
